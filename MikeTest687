@@ -1,0 +1,1419 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Bio. Inc</title>
+</head>
+<style>
+   .system {
+       width: 400px;
+       height: 300px;
+       border: 1px solid black;
+       text-align: center;
+   }
+
+   .health {
+       width: 350px;
+       height: 20px;
+       border: 1px solid black;
+       margin: 0 auto;
+       margin-top: 5px;
+   }
+
+   .color {
+       width: 300px;
+       height: 15px;
+       background: green;
+       text-align: center;
+       color: white;
+   }
+
+   .virus {
+       width: 300px;
+   }
+
+   #dna_points {
+       position: absolute;
+       margin-left: 1750px;
+       bottom: 875px;
+   }
+
+   #menu {
+       position: absolute;
+       margin-left: 1300px;
+       bottom: 870px;
+       border: 1px solid black;
+       width: 400px;
+       height: 60px;
+   }
+
+   #cure_div {
+       position: absolute;
+       width: 700px;
+       height: 600px;
+       border: 1px solid black;
+       text-align: center;
+       margin-left: 600px;
+       bottom: 200px;
+   }
+
+   #cure {
+       border: 1px solid black;
+       width: 300px;
+       height: 15px;
+       margin: 0 auto;
+   }
+
+   #amount {
+       background: green;
+       text-align: center;
+       width: 0;
+       height: 15px;
+   }
+
+   .DNA {
+       width: 350px;
+   }
+
+   .screen {
+       position: absolute;
+       border: 1px solid black;
+       width: 2000px;
+       height: 2300px;
+       text-align: center;
+       margin: auto 0;
+       top: 0;
+       background: black;
+       font-size: 200px;
+       font-family: monospace;
+       color: white;
+       display: none;
+   }
+
+   .screen>button {
+       width: 800px;
+       height: 200px;
+       font-size: 100px;
+   }
+
+   .screen>p {
+       font-size: 20px;
+   }
+</style>
+
+<body>
+   <div id="digestive" class="system">
+       Digestive System And Endotracheal Tube:
+       <div id="d_health" class="health">
+           <div id="d_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('d_color')">Infect digestive system for 10DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 1000 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="respiratory" class="system">
+       Respiratory System:
+       <div id="r_health" class="health">
+           <div id="r_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('r_color')">Infect respiratory system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="circulatory" class="system">
+       Circulatory System:
+       <div id="c_health" class="health">
+           <div id="c_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('c_color')">Infect circulatory system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="nervous" class="system">
+       Nervous System:
+       <div id="n_health" class="health">
+           <div id="n_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('n_color')">Infect nervous system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="muscular" class="system">
+       Muscular System:
+       <div id="m_health" class="health">
+           <div id="m_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('m_color')">Infect muscular system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="renal" class="system">
+       Renal System:
+       <div id="re_health" class="health">
+           <div id="re_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('re_color')">Infect renal system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="skeletal" class="system">
+       Skeletal System:
+       <div id="s_health" class="health">
+           <div id="s_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('s_color')">Infect skeletal system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <p id="dna_points">DNA Points: 200</p>
+   <div id="menu"><br><button
+           onclick="location.href = 'C:/Users/Michael/Documents/coding%20lessons/Bio.%20Inc/Bio.%20Inc%20Home.html'">Home</button>
+       <button onclick="location.href = location.href">Restart</button>
+       <input type="password" id="cheat_codes"><button
+           onclick="if (document.getElementById('cheat_codes').value == 'Plague.Inc') { alert('You have typed a valid code and have received 5,000,000 DNA Points.'); document.getElementById('dna_points').innerText = 'DNA Points: 5000000'; dna_points = 5000000 } else { alert('Your code is invalid.') }; document.getElementById('cheat_codes').value = ''">Submit</button>
+   </div>
+   <div id="cure_div">
+       <img src="http://cdn.lowgif.com/full/29f388006c6cf443-welcome-to-the-machine-gifs-find-share-on-giphy.gif"
+           id="cure_gif">
+       Cure Production:
+       <div id="cure">
+           <div id="amount">0%</div>
+       </div>
+   </div>
+   <div id="lose_screen" class="screen">You Lose!<br>
+       <p>The doctors have found a cure.</p><button
+           onclick="location.href = 'C:/Users/Michael/Documents/coding%20lessons/Bio.%20Inc/Bio.%20Inc%20Home.html'">Play
+           Again</button><br><img src="https://i.pinimg.com/originals/2d/7c/fe/2d7cfe18641bf557e623540142ddc364.gif"
+           alt="">
+   </div>
+   <div id="win_screen" class="screen">You Win!<br>
+       <p>You have infected all the systems.</p><button
+           onclick="location.href = 'C:/Users/Michael/Documents/coding%20lessons/Bio.%20Inc/Bio.%20Inc%20Home.html'">Play
+           Again</button><br><img
+           src="https://d1j8pt39hxlh3d.cloudfront.net/uploads/beaming_face_with_smiling_eyes_256_2.gif" alt="">
+   </div>
+</body>
+<script>
+   var dna_points = 200;
+   var plus_cure = setInterval(add_cure, 3000);
+   var plus_DNA = setInterval(add_DNA, 18000)
+   var cure = document.getElementById("amount");
+   var win_counter = 0;
+   var counter = 1;
+   var p_counter = 1;
+   var health1 = 300;
+   var health2 = 300;
+   var health3 = 300;
+   var health4 = 300;
+   var health5 = 300;
+   var health6 = 300;
+   var health7 = 300;
+   function add_cure() {
+       if (p_counter === 101) {
+           clearInterval(plus_cure);
+           document.getElementById("lose_screen").style.display = "block";
+       }
+       if (counter % 3 === 0) {
+           cure.innerText = p_counter + "%";
+           p_counter += 1;
+       }
+       cure.style.width = counter + "px";
+       counter += 1;
+   }
+   function infect(target) {
+       var system = document.getElementById(target);
+       if (dna_points == 50) {
+           for (var x = 0; x < 7; x++) {
+               document.getElementsByClassName("virus")[x].disabled = true;
+           }
+       }
+       switch (target) {
+           case "d_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[0].disabled = true;
+                   win_counter += 1;
+               }
+               health1 -= 20;
+               system.style.width = health1 + "px";
+               system.innerText = (100 - (300 - health1) / 3).toFixed(2) + "%";
+               break;
+           case "r_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[1].disabled = true;
+                   win_counter += 1;
+               }
+               health2 -= 20;
+               system.style.width = health2 + "px";
+               system.innerText = (100 - (300 - health2) / 3).toFixed(2) + "%";
+               break;
+           case "c_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[2].disabled = true;
+                   win_counter += 1;
+               }
+               health3 -= 20;
+               system.style.width = health3 + "px";
+               system.innerText = (100 - (300 - health3) / 3).toFixed(2) + "%";
+               break;
+           case "n_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[3].disabled = true;
+                   win_counter += 1;
+               }
+               health4 -= 20;
+               system.style.width = health4 + "px";
+               system.innerText = (100 - (300 - health4) / 3).toFixed(2) + "%";
+               break;
+           case "m_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[4].disabled = true;
+                   win_counter += 1;
+               }
+               health5 -= 20;
+               system.style.width = health5 + "px";
+               system.innerText = (100 - (300 - health5) / 3).toFixed(2) + "%";
+               break;
+           case "re_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[5].disabled = true;
+                   win_counter += 1;
+               }
+               health6 -= 20;
+               system.style.width = health6 + "px";
+               system.innerText = (100 - (300 - health6) / 3).toFixed(2) + "%";
+               break;
+           case "s_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[6].disabled = true;
+                   win_counter += 1;
+               }
+               health7 -= 20;
+               system.style.width = health7 + "px";
+               system.innerText = (100 - (300 - health7) / 3).toFixed(2) + "%";
+               break;
+       }
+       dna_points -= 50;
+       document.getElementById("dna_points").innerText = "DNA Points: " + dna_points;
+       if (win_counter == 7) {
+           setTimeout(() => {
+               document.getElementById("win_screen").style.display = "block";
+           }, 500);
+       }
+   }
+   function add_DNA() {
+       var which = Math.floor(Math.random() * 7);
+       document.getElementsByClassName("DNA")[which].disabled = false;
+       document.getElementsByClassName("DNA")[which].onclick = function () {
+           dna_points += 50;
+           document.getElementById("dna_points").innerText = "DNA Points: " + dna_points;
+           for (var i = 0; i < 7; i++) {
+               if (document.getElementsByClassName("color")[i].style.width !== "0px")
+                   document.getElementsByClassName("virus")[i].disabled = false;
+           }
+           which = Math.floor(Math.random() * 7)
+           document.getElementsByClassName("DNA")[which].disabled = true;
+       }
+   }
+</script>
+
+</html>
+<!DO<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Bio. Inc</title>
+</head>
+<style>
+   .system {
+       width: 400px;
+       height: 300px;
+       border: 1px solid black;
+       text-align: center;
+   }
+
+   .health {
+       width: 300px;
+       height: 15px;
+       border: 1px solid black;
+       margin: 0 auto;
+       margin-top: 5px;
+   }
+
+   .color {
+       width: 300px;
+       height: 15px;
+       background: green;
+       text-align: center;
+       color: white;
+   }
+
+   .virus {
+       width: 300px;
+   }
+
+   #dna_points {
+       position: absolute;
+       margin-left: 1750px;
+       bottom: 875px;
+   }
+
+   #menu {
+       position: absolute;
+       margin-left: 1300px;
+       bottom: 870px;
+       border: 1px solid black;
+       width: 400px;
+       height: 60px;
+   }
+
+   #cure_div {
+       position: absolute;
+       width: 700px;
+       height: 600px;
+       border: 1px solid black;
+       text-align: center;
+       margin-left: 600px;
+       bottom: 200px;
+   }
+
+   #cure {
+       border: 1px solid black;
+       width: 300px;
+       height: 15px;
+       margin: 0 auto;
+   }
+
+   #amount {
+       background: green;
+       text-align: center;
+       width: 0;
+       height: 15px;
+   }
+
+   .DNA {
+       width: 300px;
+   }
+
+   .screen {
+       position: absolute;
+       border: 1px solid black;
+       width: 2000px;
+       height: 2300px;
+       text-align: center;
+       margin: auto 0;
+       top: 0;
+       background: black;
+       font-size: 200px;
+       font-family: monospace;
+       color: white;
+       display: none;
+   }
+
+   .screen>button {
+       width: 800px;
+       height: 200px;
+       font-size: 100px;
+   }
+
+   .screen>p {
+       font-size: 20px;
+   }
+</style>
+
+<body>
+   <div id="digestive" class="system">
+       Digestive System:
+       <div id="d_health" class="health">
+           <div id="d_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('d_color')">Infect digestive system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="respiratory" class="system">
+       Respiratory System:
+       <div id="r_health" class="health">
+           <div id="r_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('r_color')">Infect respiratory system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="circulatory" class="system">
+       Circulatory System:
+       <div id="c_health" class="health">
+           <div id="c_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('c_color')">Infect circulatory system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="nervous" class="system">
+       Nervous System:
+       <div id="n_health" class="health">
+           <div id="n_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('n_color')">Infect nervous system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="muscular" class="system">
+       Muscular System:
+       <div id="m_health" class="health">
+           <div id="m_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('m_color')">Infect muscular system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="renal" class="system">
+       Renal System:
+       <div id="re_health" class="health">
+           <div id="re_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('re_color')">Infect renal system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="skeletal" class="system">
+       Skeletal System:
+       <div id="s_health" class="health">
+           <div id="s_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('s_color')">Infect skeletal system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <p id="dna_points">DNA Points: 150</p>
+   <div id="menu"><br><button
+           onclick="location.href = 'C:/Users/Michael/Documents/coding%20lessons/Bio.%20Inc/Bio.%20Inc%20Home.html'">Home</button>
+       <button onclick="location.href = location.href">Restart</button>
+       <input type="password" id="cheat_codes"><button
+           onclick="if (document.getElementById('cheat_codes').value == 'Plague.Inc') { alert('You have typed a valid code and have received 5,000,000 DNA Points.'); document.getElementById('dna_points').innerText = 'DNA Points: 5000000'; dna_points = 5000000 } else { alert('Your code is invalid.') }; document.getElementById('cheat_codes').value = ''">Submit</button>
+   </div>
+   <div id="cure_div">
+       <img src="http://cdn.lowgif.com/full/29f388006c6cf443-welcome-to-the-machine-gifs-find-share-on-giphy.gif"
+           id="cure_gif">
+       Cure Production:
+       <div id="cure">
+           <div id="amount">0%</div>
+       </div>
+   </div>
+   <div id="lose_screen" class="screen">You Lose!<br>
+       <p>The doctors have found a cure.</p><button
+           onclick="location.href = 'C:/Users/Michael/Documents/coding%20lessons/Bio.%20Inc/Bio.%20Inc%20Home.html'">Play
+           Again</button><br><img src="https://i.pinimg.com/originals/2d/7c/fe/2d7cfe18641bf557e623540142ddc364.gif"
+           alt="">
+   </div>
+   <div id="win_screen" class="screen">You Win!<br>
+       <p>You have infected all the systems.</p><button
+           onclick="location.href = 'C:/Users/Michael/Documents/coding%20lessons/Bio.%20Inc/Bio.%20Inc%20Home.html'">Play
+           Again</button><br><img
+           src="https://d1j8pt39hxlh3d.cloudfront.net/uploads/beaming_face_with_smiling_eyes_256_2.gif" alt="">
+   </div>
+</body>
+<script>
+   var dna_points = 150;
+   var plus_cure = setInterval(add_cure, 3000);
+   var plus_DNA = setInterval(add_DNA, 25000)
+   var cure = document.getElementById("amount");
+   var win_counter = 0;
+   var counter = 1;
+   var p_counter = 1;
+   var health1 = 300;
+   var health2 = 300;
+   var health3 = 300;
+   var health4 = 300;
+   var health5 = 300;
+   var health6 = 300;
+   var health7 = 300;
+   function add_cure() {
+       if (p_counter === 101) {
+           clearInterval(plus_cure);
+           document.getElementById("lose_screen").style.display = "block";
+       }
+       if (counter % 3 === 0) {
+           cure.innerText = p_counter + "%";
+           p_counter += 1;
+       }
+       cure.style.width = counter + "px";
+       counter += 1;
+   }
+   function infect(target) {
+       var system = document.getElementById(target);
+       if (dna_points == 50) {
+           for (var x = 0; x < 7; x++) {
+               document.getElementsByClassName("virus")[x].disabled = true;
+           }
+       }
+       switch (target) {
+           case "d_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[0].disabled = true;
+                   win_counter += 1;
+               }
+               health1 -= 10;
+               system.style.width = health1 + "px";
+               system.innerText = (100 - (300 - health1) / 3).toFixed(2) + "%";
+               break;
+           case "r_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[1].disabled = true;
+                   win_counter += 1;
+               }
+               health2 -= 10;
+               system.style.width = health2 + "px";
+               system.innerText = (100 - (300 - health2) / 3).toFixed(2) + "%";
+               break;
+           case "c_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[2].disabled = true;
+                   win_counter += 1;
+               }
+               health3 -= 10;
+               system.style.width = health3 + "px";
+               system.innerText = (100 - (300 - health3) / 3).toFixed(2) + "%";
+               break;
+           case "n_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[3].disabled = true;
+                   win_counter += 1;
+               }
+               health4 -= 10;
+               system.style.width = health4 + "px";
+               system.innerText = (100 - (300 - health4) / 3).toFixed(2) + "%";
+               break;
+           case "m_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[4].disabled = true;
+                   win_counter += 1;
+               }
+               health5 -= 10;
+               system.style.width = health5 + "px";
+               system.innerText = (100 - (300 - health5) / 3).toFixed(2) + "%";
+               break;
+           case "re_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[5].disabled = true;
+                   win_counter += 1;
+               }
+               health6 -= 10;
+               system.style.width = health6 + "px";
+               system.innerText = (100 - (300 - health6) / 3).toFixed(2) + "%";
+               break;
+           case "s_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[6].disabled = true;
+                   win_counter += 1;
+               }
+               health7 -= 10;
+               system.style.width = health7 + "px";
+               system.innerText = (100 - (300 - health7) / 3).toFixed(2) + "%";
+               break;
+       }
+       dna_points -= 50;
+       document.getElementById("dna_points").innerText = "DNA Points: " + dna_points;
+       if (win_counter == 7) {
+           setTimeout(() => {
+               document.getElementById("win_screen").style.display = "block";
+           }, 500);
+       }
+   }
+   function add_DNA() {
+       var which = Math.floor(Math.random() * 7);
+       document.getElementsByClassName("DNA")[which].disabled = false;
+       document.getElementsByClassName("DNA")[which].onclick = function () {
+           dna_points += 50;
+           document.getElementById("dna_points").innerText = "DNA Points: " + dna_points;
+           for (var i = 0; i < 7; i++) {
+               if (document.getElementsByClassName("color")[i].style.width !== "0px")
+                   document.getElementsByClassName("virus")[i].disabled = false;
+           }
+           which = Math.floor(Math.random() * 7)
+           document.getElementsByClassName("DNA")[which].disabled = true;
+       }
+   }
+</script>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Bio. Inc</title>
+</head>
+<style>
+   .system {
+       width: 400px;
+       height: 300px;
+       border: 1px solid black;
+       text-align: center;
+   }
+
+   .health {
+       width: 300px;
+       height: 15px;
+       border: 1px solid black;
+       margin: 0 auto;
+       margin-top: 5px;
+   }
+
+   .color {
+       width: 300px;
+       height: 15px;
+       background: green;
+       text-align: center;
+       color: white;
+   }
+
+   .virus {
+       width: 300px;
+   }
+
+   #dna_points {
+       position: absolute;
+       margin-left: 1750px;
+       bottom: 875px;
+   }
+
+   #menu {
+       position: absolute;
+       margin-left: 1300px;
+       bottom: 870px;
+       border: 1px solid black;
+       width: 400px;
+       height: 60px;
+   }
+
+   #cure_div {
+       position: absolute;
+       width: 700px;
+       height: 600px;
+       border: 1px solid black;
+       text-align: center;
+       margin-left: 600px;
+       bottom: 200px;
+   }
+
+   #cure {
+       border: 1px solid black;
+       width: 300px;
+       height: 15px;
+       margin: 0 auto;
+   }
+
+   #amount {
+       background: green;
+       text-align: center;
+       width: 0;
+       height: 15px;
+   }
+
+   .DNA {
+       width: 300px;
+   }
+
+   .screen {
+       position: absolute;
+       border: 1px solid black;
+       width: 2000px;
+       height: 2300px;
+       text-align: center;
+       margin: auto 0;
+       top: 0;
+       background: black;
+       font-size: 200px;
+       font-family: monospace;
+       color: white;
+       display: none;
+   }
+
+   .screen>button {
+       width: 800px;
+       height: 200px;
+       font-size: 100px;
+   }
+
+   .screen>p {
+       font-size: 20px;
+   }
+</style>
+
+<body>
+   <div id="digestive" class="system">
+       Digestive System:
+       <div id="d_health" class="health">
+           <div id="d_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('d_color')">Infect digestive system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="respiratory" class="system">
+       Respiratory System:
+       <div id="r_health" class="health">
+           <div id="r_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('r_color')">Infect respiratory system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="circulatory" class="system">
+       Circulatory System:
+       <div id="c_health" class="health">
+           <div id="c_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('c_color')">Infect circulatory system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="nervous" class="system">
+       Nervous System:
+       <div id="n_health" class="health">
+           <div id="n_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('n_color')">Infect nervous system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="muscular" class="system">
+       Muscular System:
+       <div id="m_health" class="health">
+           <div id="m_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('m_color')">Infect muscular system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="renal" class="system">
+       Renal System:
+       <div id="re_health" class="health">
+           <div id="re_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('re_color')">Infect renal system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="skeletal" class="system">
+       Skeletal System:
+       <div id="s_health" class="health">
+           <div id="s_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('s_color')">Infect skeletal system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <p id="dna_points">DNA Points: 150</p>
+   <div id="menu"><br><button
+           onclick="location.href = 'C:/Users/Michael/Documents/coding%20lessons/Bio.%20Inc/Bio.%20Inc%20Home.html'">Home</button>
+       <button onclick="location.href = location.href">Restart</button>
+       <input type="password" id="cheat_codes"><button
+           onclick="if (document.getElementById('cheat_codes').value == 'Plague.Inc') { alert('You have typed a valid code and have received 5,000,000 DNA Points.'); document.getElementById('dna_points').innerText = 'DNA Points: 5000000'; dna_points = 5000000 } else { alert('Your code is invalid.') }; document.getElementById('cheat_codes').value = ''">Submit</button>
+   </div>
+   <div id="cure_div">
+       <img src="http://cdn.lowgif.com/full/29f388006c6cf443-welcome-to-the-machine-gifs-find-share-on-giphy.gif"
+           id="cure_gif">
+       Cure Production:
+       <div id="cure">
+           <div id="amount">0%</div>
+       </div>
+   </div>
+   <div id="lose_screen" class="screen">You Lose!<br>
+       <p>The doctors have found a cure.</p><button
+           onclick="location.href = 'C:/Users/Michael/Documents/coding%20lessons/Bio.%20Inc/Bio.%20Inc%20Home.html'">Play
+           Again</button><br><img src="https://i.pinimg.com/originals/2d/7c/fe/2d7cfe18641bf557e623540142ddc364.gif"
+           alt="">
+   </div>
+   <div id="win_screen" class="screen">You Win!<br>
+       <p>You have infected all the systems.</p><button
+           onclick="location.href = 'C:/Users/Michael/Documents/coding%20lessons/Bio.%20Inc/Bio.%20Inc%20Home.html'">Play
+           Again</button><br><img
+           src="https://d1j8pt39hxlh3d.cloudfront.net/uploads/beaming_face_with_smiling_eyes_256_2.gif" alt="">
+   </div>
+</body>
+<script>
+   var dna_points = 150;
+   var plus_cure = setInterval(add_cure, 3000);
+   var plus_DNA = setInterval(add_DNA, 25000)
+   var cure = document.getElementById("amount");
+   var win_counter = 0;
+   var counter = 1;
+   var p_counter = 1;
+   var health1 = 300;
+   var health2 = 300;
+   var health3 = 300;
+   var health4 = 300;
+   var health5 = 300;
+   var health6 = 300;
+   var health7 = 300;
+   function add_cure() {
+       if (p_counter === 101) {
+           clearInterval(plus_cure);
+           document.getElementById("lose_screen").style.display = "block";
+       }
+       if (counter % 3 === 0) {
+           cure.innerText = p_counter + "%";
+           p_counter += 1;
+       }
+       cure.style.width = counter + "px";
+       counter += 1;
+   }
+   function infect(target) {
+       var system = document.getElementById(target);
+       if (dna_points == 50) {
+           for (var x = 0; x < 7; x++) {
+               document.getElementsByClassName("virus")[x].disabled = true;
+           }
+       }
+       switch (target) {
+           case "d_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[0].disabled = true;
+                   win_counter += 1;
+               }
+               health1 -= 10;
+               system.style.width = health1 + "px";
+               system.innerText = (100 - (300 - health1) / 3).toFixed(2) + "%";
+               break;
+           case "r_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[1].disabled = true;
+                   win_counter += 1;
+               }
+               health2 -= 10;
+               system.style.width = health2 + "px";
+               system.innerText = (100 - (300 - health2) / 3).toFixed(2) + "%";
+               break;
+           case "c_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[2].disabled = true;
+                   win_counter += 1;
+               }
+               health3 -= 10;
+               system.style.width = health3 + "px";
+               system.innerText = (100 - (300 - health3) / 3).toFixed(2) + "%";
+               break;
+           case "n_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[3].disabled = true;
+                   win_counter += 1;
+               }
+               health4 -= 10;
+               system.style.width = health4 + "px";
+               system.innerText = (100 - (300 - health4) / 3).toFixed(2) + "%";
+               break;
+           case "m_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[4].disabled = true;
+                   win_counter += 1;
+               }
+               health5 -= 10;
+               system.style.width = health5 + "px";
+               system.innerText = (100 - (300 - health5) / 3).toFixed(2) + "%";
+               break;
+           case "re_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[5].disabled = true;
+                   win_counter += 1;
+               }
+               health6 -= 10;
+               system.style.width = health6 + "px";
+               system.innerText = (100 - (300 - health6) / 3).toFixed(2) + "%";
+               break;
+           case "s_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[6].disabled = true;
+                   win_counter += 1;
+               }
+               health7 -= 10;
+               system.style.width = health7 + "px";
+               system.innerText = (100 - (300 - health7) / 3).toFixed(2) + "%";
+               break;
+       }
+       dna_points -= 50;
+       document.getElementById("dna_points").innerText = "DNA Points: " + dna_points;
+       if (win_counter == 7) {
+           setTimeout(() => {
+               document.getElementById("win_screen").style.display = "block";
+           }, 500);
+       }
+   }
+   function add_DNA() {
+       var which = Math.floor(Math.random() * 7);
+       document.getElementsByClassName("DNA")[which].disabled = false;
+       document.getElementsByClassName("DNA")[which].onclick = function () {
+           dna_points += 50;
+           document.getElementById("dna_points").innerText = "DNA Points: " + dna_points;
+           for (var i = 0; i < 7; i++) {
+               if (document.getElementsByClassName("color")[i].style.width !== "0px")
+                   document.getElementsByClassName("virus")[i].disabled = false;
+           }
+           which = Math.floor(Math.random() * 7)
+           document.getElementsByClassName("DNA")[which].disabled = true;
+       }
+   }
+</script>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Bio. Inc</title>
+</head>
+<style>
+   .system {
+       width: 400px;
+       height: 300px;
+       border: 1px solid black;
+       text-align: center;
+   }
+
+   .health {
+       width: 300px;
+       height: 15px;
+       border: 1px solid black;
+       margin: 0 auto;
+       margin-top: 5px;
+   }
+
+   .color {
+       width: 300px;
+       height: 15px;
+       background: green;
+       text-align: center;
+       color: white;
+   }
+
+   .virus {
+       width: 300px;
+   }
+
+   #dna_points {
+       position: absolute;
+       margin-left: 1750px;
+       bottom: 875px;
+   }
+
+   #menu {
+       position: absolute;
+       margin-left: 1300px;
+       bottom: 870px;
+       border: 1px solid black;
+       width: 400px;
+       height: 60px;
+   }
+
+   #cure_div {
+       position: absolute;
+       width: 700px;
+       height: 600px;
+       border: 1px solid black;
+       text-align: center;
+       margin-left: 600px;
+       bottom: 200px;
+   }
+
+   #cure {
+       border: 1px solid black;
+       width: 300px;
+       height: 15px;
+       margin: 0 auto;
+   }
+
+   #amount {
+       background: green;
+       text-align: center;
+       width: 0;
+       height: 15px;
+   }
+
+   .DNA {
+       width: 300px;
+   }
+
+   .screen {
+       position: absolute;
+       border: 1px solid black;
+       width: 2000px;
+       height: 2300px;
+       text-align: center;
+       margin: auto 0;
+       top: 0;
+       background: black;
+       font-size: 200px;
+       font-family: monospace;
+       color: white;
+       display: none;
+   }
+
+   .screen>button {
+       width: 800px;
+       height: 200px;
+       font-size: 100px;
+   }
+
+   .screen>p {
+       font-size: 20px;
+   }
+</style>
+
+<body>
+   <div id="digestive" class="system">
+       Digestive System:
+       <div id="d_health" class="health">
+           <div id="d_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('d_color')">Infect digestive system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="respiratory" class="system">
+       Respiratory System:
+       <div id="r_health" class="health">
+           <div id="r_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('r_color')">Infect respiratory system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="circulatory" class="system">
+       Circulatory System:
+       <div id="c_health" class="health">
+           <div id="c_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('c_color')">Infect circulatory system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="nervous" class="system">
+       Nervous System:
+       <div id="n_health" class="health">
+           <div id="n_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('n_color')">Infect nervous system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="muscular" class="system">
+       Muscular System:
+       <div id="m_health" class="health">
+           <div id="m_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('m_color')">Infect muscular system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="renal" class="system">
+       Renal System:
+       <div id="re_health" class="health">
+           <div id="re_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('re_color')">Infect renal system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <br>
+   <div id="skeletal" class="system">
+       Skeletal System:
+       <div id="s_health" class="health">
+           <div id="s_color" class="color">100%</div>
+           <br>
+           <button class="virus" onclick="infect('s_color')">Infect skeletal system for 50 DNA points</button>
+           <br>
+           <br>
+           <button class="DNA" disabled>Claim 50 DNA</button>
+       </div>
+   </div>
+   <p id="dna_points">DNA Points: 100</p>
+   <div id="menu"><br><button
+           onclick="location.href = 'C:/Users/Michael/Documents/coding%20lessons/Bio.%20Inc/Bio.%20Inc%20Home.html'">Home</button>
+       <button onclick="location.href = location.href">Restart</button>
+       <input type="password" id="cheat_codes"><button
+           onclick="if (document.getElementById('cheat_codes').value == 'Plague.Inc') { alert('You have typed a valid code and have received 5,000,000 DNA Points.'); document.getElementById('dna_points').innerText = 'DNA Points: 5000000'; dna_points = 5000000 } else { alert('Your code is invalid.') }; document.getElementById('cheat_codes').value = ''">Submit</button>
+   </div>
+   <div id="cure_div">
+       <img src="http://cdn.lowgif.com/full/29f388006c6cf443-welcome-to-the-machine-gifs-find-share-on-giphy.gif"
+           id="cure_gif">
+       Cure Production:
+       <div id="cure">
+           <div id="amount">0%</div>
+       </div>
+   </div>
+   <div id="lose_screen" class="screen">You Lose!<br>
+       <p>The doctors have found a cure.</p><button
+           onclick="location.href = 'C:/Users/Michael/Documents/coding%20lessons/Bio.%20Inc/Bio.%20Inc%20Home.html'">Play
+           Again</button><br><img src="https://i.pinimg.com/originals/2d/7c/fe/2d7cfe18641bf557e623540142ddc364.gif"
+           alt="">
+   </div>
+   <div id="win_screen" class="screen">You Win!<br>
+       <p>You have infected all the systems.</p><button
+           onclick="location.href = 'C:/Users/Michael/Documents/coding%20lessons/Bio.%20Inc/Bio.%20Inc%20Home.html'">Play
+           Again</button><br><img
+           src="https://d1j8pt39hxlh3d.cloudfront.net/uploads/beaming_face_with_smiling_eyes_256_2.gif" alt="">
+   </div>
+</body>
+<script>
+   var dna_points = 100;
+   var plus_cure = setInterval(add_cure, 2000);
+   var plus_DNA = setInterval(add_DNA, 10000)
+   var cure = document.getElementById("amount");
+   var win_counter = 0;
+   var counter = 1;
+   var p_counter = 1;
+   var health1 = 300;
+   var health2 = 300;
+   var health3 = 300;
+   var health4 = 300;
+   var health5 = 300;
+   var health6 = 300;
+   var health7 = 300;
+   function add_cure() {
+       if (p_counter === 101) {
+           clearInterval(plus_cure);
+           document.getElementById("lose_screen").style.display = "block";
+       }
+       if (counter % 3 === 0) {
+           cure.innerText = p_counter + "%";
+           p_counter += 1;
+       }
+       cure.style.width = counter + "px";
+       counter += 1;
+   }
+   function infect(target) {
+       var system = document.getElementById(target);
+       if (dna_points == 50) {
+           for (var x = 0; x < 7; x++) {
+               document.getElementsByClassName("virus")[x].disabled = true;
+           }
+       }
+       switch (target) {
+           case "d_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[0].disabled = true;
+                   win_counter += 1;
+               }
+               health1 -= 5;
+               system.style.width = health1 + "px";
+               system.innerText = (100 - (300 - health1) / 3).toFixed(2) + "%";
+               break;
+           case "r_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[1].disabled = true;
+                   win_counter += 1;
+               }
+               health2 -= 5;
+               system.style.width = health2 + "px";
+               system.innerText = (100 - (300 - health2) / 3).toFixed(2) + "%";
+               break;
+           case "c_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[2].disabled = true;
+                   win_counter += 1;
+               }
+               health3 -= 5;
+               system.style.width = health3 + "px";
+               system.innerText = (100 - (300 - health3) / 3).toFixed(2) + "%";
+               break;
+           case "n_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[3].disabled = true;
+                   win_counter += 1;
+               }
+               health4 -= 5;
+               system.style.width = health4 + "px";
+               system.innerText = (100 - (300 - health4) / 3).toFixed(2) + "%";
+               break;
+           case "m_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[4].disabled = true;
+                   win_counter += 1;
+               }
+               health5 -= 5;
+               system.style.width = health5 + "px";
+               system.innerText = (100 - (300 - health5) / 3).toFixed(2) + "%";
+               break;
+           case "re_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[5].disabled = true;
+                   win_counter += 1;
+               }
+               health6 -= 5;
+               system.style.width = health6 + "px";
+               system.innerText = (100 - (300 - health6) / 3).toFixed(2) + "%";
+               break;
+           case "s_color":
+               if (system.style.width == 0 + "px") {
+                   document.getElementsByClassName("virus")[6].disabled = true;
+                   win_counter += 1;
+               }
+               health7 -= 5;
+               system.style.width = health7 + "px";
+               system.innerText = (100 - (300 - health7) / 3).toFixed(2) + "%";
+               break;
+       }
+       dna_points -= 50;
+       document.getElementById("dna_points").innerText = "DNA Points: " + dna_points;
+       if (win_counter == 7) {
+           setTimeout(() => {
+               document.getElementById("win_screen").style.display = "block";
+           }, 500);
+       }
+   }
+   function add_DNA() {
+       var which = Math.floor(Math.random() * 7);
+       document.getElementsByClassName("DNA")[which].disabled = false;
+       document.getElementsByClassName("DNA")[which].onclick = function () {
+           dna_points += 50;
+           document.getElementById("dna_points").innerText = "DNA Points: " + dna_points;
+           for (var i = 0; i < 7; i++) {
+               if (document.getElementsByClassName("color")[i].style.width !== "0px")
+                   document.getElementsByClassName("virus")[i].disabled = false;
+           }
+           which = Math.floor(Math.random() * 7)
+           document.getElementsByClassName("DNA")[which].disabled = true;
+       }
+   }
+</script>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Bio. Inc</title>
+   <style>
+       h1 {
+           text-align: center;
+           font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+           font-size: 150px;
+       }
+       button {
+           width: 200px;;
+           height: 100px;
+           font-size: 85px;
+           text-align: center;
+           margin-left: 45%;
+       }
+       #normal {
+           width: 400px;
+           margin-left: 40%;
+       }
+       p {
+           font-size: 40px;
+           text-align: center;
+       }
+       .version {
+           font-family: monospace;
+           font-size: 25px;
+       }
+   </style>
+</head>
+<body>
+   <h1>Bio. Inc</h1>
+   <p class="version">Version: 0.0.1</p>
+   <p class="version">Next Update: June 23 2019</p>
+   <button onclick="location.href = 'C:/Users/Michael/Documents/coding%20lessons/Bio.%20Inc/Bio.%20Inc%20Easy.HTML'">Easy</button><p>Starting DNA: 200</p>
+   <br>
+   <br>
+   <button id="normal" onclick="location.href = 'C:/Users/Michael/Documents/coding%20lessons/Bio.%20Inc/Bio.%20Inc%20Normal.HTML'">Normal</button><p><p>Starting DNA: 150</p>
+   <br>
+   <br>
+   <button onclick="location.href = 'C:/Users/Michael/Documents/coding%20lessons/Bio.%20Inc/Bio.%20Inc%20Hard.HTML'">Hard</button><p>Starting DNA: 100</p>
+</body>
+</html>
+
+
+
